@@ -627,9 +627,11 @@ function backToMenu(){
 function loadGlosario(){
   document.getElementById('unitSelect').style.display='none';
   document.getElementById('appWrap').style.display='none';
-  document.getElementById('glosarioWrap').style.display='block';
+  const wrap = document.getElementById('glosarioWrap');
+  wrap.style.display='block';
   window.scrollTo(0,0);
-  buildMainGlosario();
+  // Small delay ensures DOM is visible before rendering
+  setTimeout(buildMainGlosario, 50);
 }
 function backFromGlosario(){
   document.getElementById('glosarioWrap').style.display='none';
@@ -2030,9 +2032,27 @@ const allGlosTerms=[
   {unit:'U-II',cat:'Conceptos',term:'Diafonía (Crosstalk)',def:'Interferencia de señal entre pares de cables adyacentes dentro del mismo cable UTP. El principal factor que limita las categorías.',func:'Señales eléctricas en un par generan campos que inducen señales en pares vecinos. El trenzado cancela este efecto. NEXT = diafonía en el extremo emisor (más perjudicial). FEXT = en el extremo receptor.',dato:'Cat7 tiene 500 MHz de ancho de banda vs 100 MHz de Cat5e, principalmente porque controla mejor la diafonía en frecuencias altas. Esa mejora de control es lo que habilita 10 Gbps confiables a 100m.'},
 ];
 
+let currentGlosFilter='Todos';
+function toggleGlos(id, h) {
+  const qi = h.parentElement;
+  const ans = document.getElementById(id);
+  const isOpen = qi.classList.contains('open');
+  // Close all others first
+  document.querySelectorAll('#mainGlosarioList .qi.open').forEach(el => {
+    el.classList.remove('open');
+    const a = el.querySelector('.qans');
+    if (a) a.classList.remove('open');
+  });
+  // Toggle clicked one
+  if (!isOpen) {
+    qi.classList.add('open');
+    if (ans) ans.classList.add('open');
+  }
+}
 function buildMainGlosario(){
   currentGlosFilter='Todos';
   const bar=document.getElementById('glosFilterBar');
+  if(!bar) return;
   bar.innerHTML=[
     {k:'Todos',l:'Todos los términos'},
     {k:'U-I',l:'Unidad I'},
@@ -2040,7 +2060,6 @@ function buildMainGlosario(){
   ].map(u=>`<button class="btnp ${u.k==='Todos'?'btna':''}" style="font-size:11px;padding:5px 12px" onclick="setGlosFilter('${u.k}',this)">${u.l}</button>`).join('');
   renderMainGlosario('Todos','');
 }
-let currentGlosFilter='Todos';
 function setGlosFilter(f,btn){
   currentGlosFilter=f;
   document.querySelectorAll('#glosFilterBar .btnp').forEach(b=>b.classList.remove('btna'));
@@ -2052,7 +2071,9 @@ function filterMainGlosario(){
 }
 function renderMainGlosario(filter,query){
   const list=document.getElementById('mainGlosarioList');
+  if(!list) return;
   let terms=allGlosTerms;
+  if(!terms||!terms.length){list.innerHTML='<p style="color:var(--mut);text-align:center;padding:40px">Cargando términos...</p>';return;}
   if(filter&&filter!=='Todos') terms=terms.filter(t=>t.unit===filter);
   if(query) terms=terms.filter(t=>t.term.toLowerCase().includes(query.toLowerCase())||t.def.toLowerCase().includes(query.toLowerCase())||t.cat.toLowerCase().includes(query.toLowerCase()));
   if(!terms.length){list.innerHTML='<p style="color:var(--mut);text-align:center;padding:40px">No se encontraron términos para "'+query+'"</p>';return;}
