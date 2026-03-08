@@ -2,7 +2,7 @@
   "name": "Redes de Procesamiento de Datos",
   "short_name": "Redes INF-4260",
   "description": "Material de estudio interactivo \u00b7 INF-4260 \u00b7 UASD \u00b7 Sandino Perdomo Aquino",
-  "start_url": "./redes6-inf4260.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#050d14",
   "theme_color": "#050d14",
