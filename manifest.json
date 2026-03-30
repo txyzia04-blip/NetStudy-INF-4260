@@ -1,0 +1,17 @@
+{
+  "name": "Redes INF-4260 · UASD",
+  "short_name": "Redes 4260",
+  "description": "Material de estudio interactivo · INF-4260 · UASD",
+  "start_url": "./redes9-inf4260.html",
+  "display": "standalone",
+  "background_color": "#050d14",
+  "theme_color": "#050d14",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAVe0lEQVR4nO2deXQUVb7Hv9Xd2dNhkYiZBIOPh0eII4qojBBFhYnDMiij8HwcBR2C28HoPDzw5jFPxmUUZkaJjBsIM4iOI0fBJ+MSRHzPiCIqotKIC0piQlgTSGdPd9X7o7uSolPVVdVd2+36fc7JSaf6bvW7v+/93XtrCQcH4S8cKejNE6wK+P1lJUEz2mMFbm1/sH4vZ0Z79OKzs/JEHJ5IDWL73i5BWCoAcnhCCbsEYYkAyPEJvYg+Y7YQTBUAOT6RLGYLwRQBkOMTRmOWEAwVADk+YTZGC8FjRCEAOT9hLUb5myECIOcn7MAIv0tqCkSOT9hNslOihCMAOT/hJBL1x4QEQM5POJFE/FK3AMj5CSej1z91CYCcn2ABPX6qWQDk",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
